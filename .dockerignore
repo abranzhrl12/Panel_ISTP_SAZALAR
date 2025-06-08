@@ -1,0 +1,17 @@
+# Ignora el directorio de módulos de Node.js, ya que se instalarán en el contenedor
+node_modules
+# Ignora el directorio de construcción local, ya que se construirá en el contenedor
+dist
+build
+# Ignora el directorio de caché de Bun
+.bun
+
+# Archivos de configuración y caché específicos de desarrollo
+
+
+.vscode
+npm-debug.log
+yarn-error.log
+# Ignora cualquier otro archivo de caché o temporal
+*.log
+*.tmp

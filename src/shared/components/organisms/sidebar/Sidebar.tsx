@@ -1,0 +1,148 @@
+// src/shared/components/organisms/Sidebar/Sidebar.tsx
+import { useTheme } from "@providers/ThemeProvider";
+import { ButtonBasic } from "@shared/components/atoms"; // Ruta explícita para ButtonBasic
+import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import { useAuthStore } from "@features/auth/store/auth.store";
+
+// Importa las moléculas que componen el Sidebar con rutas explícitas
+// Asegúrate que estas rutas estén correctas según tu resolución de aliases
+import { BrandLogo } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
+import { DashboardSection } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
+import { NavList } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
+import { ThemeToogle } from "@shared/components/molecules"; // Ruta explícita
+import { UserAvatar } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
+
+export const Sidebar = () => {
+  const navigate = useNavigate();
+
+  // Optimizaciones de Zustand: No se usa shallow por solicitud.
+  const logout = useAuthStore((state) => state.logout);
+  const user = useAuthStore((state) => state.user); // Obtén el objeto 'user' del store
+
+  // Función para manejar el cierre de sesión del usuario
+  const handleLogout = () => {
+    logout("manual");
+    navigate("/login", { replace: true });
+  };
+
+  const { theme } = useTheme(); // Obtiene el tema actual de ThemeProvider
+
+  // Datos para la lista de navegación
+  const navItems = [
+    { href: "#", text: "Home" },
+    { href: "#", text: "About" },
+    { href: "#", text: "Contact" },
+  ];
+
+  // Datos de usuario para el avatar y el mensaje de bienvenida
+  const currentUserName = user?.email || "Invitado";
+  const currentUserAvatarUrl = user?.avatarUrl || null;
+  const currentUserInitials = currentUserName
+    .split(" ")
+    .map((n: string) => n[0])
+    .join("")
+    .substring(0, 2)
+    .toUpperCase();
+
+  // Verifica si el usuario actual es un administrador
+  // CORRECCIÓN: Compara el rol del usuario con "admin"
+  const isAdmin = user?.role?.name === "ADMIN"; // Asume que role es un objeto con una propiedad 'name'
+
+  // Función para navegar a la página de creación de usuario
+  const handleCreateUserClick = () => {
+    navigate("/home/users/create");
+  };
+
+  // NUEVA FUNCIÓN: Para navegar a la página de lista de usuarios
+  const handleViewUsersClick = () => {
+    navigate("/home/users"); // Ruta a la página de lista de usuarios
+  };
+
+  return (
+    <div
+      className={`
+        w-64 h-screen flex flex-col p-6 shadow-xl
+        border-r border-gray-200 dark:border-gray-700
+        transition-colors duration-300 ease-in-out
+        ${
+          theme === "dark"
+            ? "bg-gray-950 text-gray-100"
+            : "bg-white text-gray-800"
+        }
+      `}
+    >
+      {/* Sección del Logo de la Marca (Molécula) */}
+      <BrandLogo />
+
+      {/* Sección de Avatar del usuario (ahora usa datos del store) */}
+      <div className="flex flex-col items-center mb-8 mt-4">
+        <UserAvatar
+          src={currentUserAvatarUrl}
+          alt={currentUserName}
+          fallbackText={currentUserInitials}
+          size="large"
+        />
+      </div>
+
+      {/* Sección Principal de Navegación */}
+      <nav className="flex flex-col flex-grow space-y-4 justify-center items-center">
+        <DashboardSection
+          welcomeMessage={`¡Bienvenido, ${currentUserName.split("@")[0]}!`}
+        />
+
+        <NavList items={navItems} />
+
+        {/* Botón para Crear Usuario - Solo visible si el usuario es administrador */}
+        {isAdmin && (
+          <>
+            {" "}
+            {/* Usamos un fragmento para agrupar los botones de administración */}
+            <li className="w-full">
+              <ButtonBasic
+                onClick={handleCreateUserClick}
+                text="Crear Usuario"
+                className={`
+                  w-full block p-3 rounded-md text-lg font-medium text-center
+                  ${
+                    theme === "dark"
+                      ? "text-indigo-300 hover:bg-indigo-700"
+                      : "text-indigo-600 hover:bg-indigo-100"
+                  }
+                  transition-colors duration-200
+                `}
+              />
+            </li>
+            {/* NUEVO: Botón para Ver Usuarios - Solo visible si el usuario es administrador */}
+            <li className="w-full">
+              <ButtonBasic
+                onClick={handleViewUsersClick}
+                text="Ver Usuarios"
+                className={`
+                  w-full block p-3 rounded-md text-lg font-medium text-center mt-2
+                  ${
+                    theme === "dark"
+                      ? "text-blue-300 hover:bg-blue-700" // Diferente color para distinguirlo
+                      : "text-blue-600 hover:bg-blue-100"
+                  }
+                  transition-colors duration-200
+                `}
+              />
+            </li>
+          </>
+        )}
+      </nav>
+
+      {/* Botón de Cerrar Sesión y sección de Alternador de Tema */}
+      <div className="mt-auto pt-6">
+        <div className="mt-4 flex justify-center">
+          <ThemeToogle />
+        </div>
+        <ButtonBasic
+          onClick={handleLogout}
+          text="Cerrar Sesión"
+          className="w-full"
+        />
+      </div>
+    </div>
+  );
+};
