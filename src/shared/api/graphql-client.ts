@@ -9,8 +9,6 @@ if (!endpoint) {
     "La variable VITE_GRAPHQL_ENDPOINT no está definida en tu archivo .env"
   );
 }
-
-// Función factoría para crear instancias de GraphQLClient
 export const createGraphQLClient = (accessToken?: string): GraphQLClient => {
   const headers: HeadersInit = {
     "Content-Type": "application/json",
