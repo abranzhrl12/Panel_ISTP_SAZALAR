@@ -1,23 +1,18 @@
 // src/shared/components/organisms/Sidebar/Sidebar.tsx
 import { useTheme } from "@providers/ThemeProvider";
-import { ButtonBasic } from "@shared/components/atoms"; // Ruta explícita para ButtonBasic
-import { useNavigate } from "react-router-dom"; // Importa useNavigate
+import { ButtonBasic } from "@shared/components/atoms"; 
+import { useNavigate } from "react-router-dom"; 
 import { useAuthStore } from "@features/auth/store/auth.store";
-
-// Importa las moléculas que componen el Sidebar con rutas explícitas
-// Asegúrate que estas rutas estén correctas según tu resolución de aliases
-import { BrandLogo } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
-import { DashboardSection } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
-import { NavList } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
-import { ThemeToogle } from "@shared/components/molecules"; // Ruta explícita
-import { UserAvatar } from "@shared/components/molecules"; // Esto asume que tienes un index.ts en @shared/components/molecules
+import { BrandLogo } from "@shared/components/molecules";
+import { DashboardSection } from "@shared/components/molecules"; 
+import { NavList } from "@shared/components/molecules"; 
+import { ThemeToogle } from "@shared/components/molecules"; 
+import { UserAvatar } from "@shared/components/molecules"; 
 
 export const Sidebar = () => {
   const navigate = useNavigate();
-
-  // Optimizaciones de Zustand: No se usa shallow por solicitud.
   const logout = useAuthStore((state) => state.logout);
-  const user = useAuthStore((state) => state.user); // Obtén el objeto 'user' del store
+  const user = useAuthStore((state) => state.user); 
 
   // Función para manejar el cierre de sesión del usuario
   const handleLogout = () => {
@@ -25,7 +20,7 @@ export const Sidebar = () => {
     navigate("/login", { replace: true });
   };
 
-  const { theme } = useTheme(); // Obtiene el tema actual de ThemeProvider
+  const { theme } = useTheme(); 
 
   // Datos para la lista de navegación
   const navItems = [
