@@ -4,9 +4,6 @@ import { LoginPage } from "../features/auth/LoginPage";
 import { Home } from "../features/home/home";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { useInactivityDetector } from "@shared/hooks/inactivity/useInactivityDetector";
-import { UserCreationPage } from "@features/user-management/pages/UserCreationPage";
-import { UserListPage } from "@features/user-management/pages/UserListPage";
-
 export const AppRoutes: React.FC = () => {
   useInactivityDetector(false);
 
@@ -22,8 +19,6 @@ export const AppRoutes: React.FC = () => {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <>
-                  <Route path="users/create" element={<UserCreationPage />} />
-                  <Route path="users" element={<UserListPage />} />
                 </>
                 ) : (
                 <Route

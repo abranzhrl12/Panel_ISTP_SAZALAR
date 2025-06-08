@@ -1,27 +1,28 @@
 // src/features/auth/hooks/useLogin.ts
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-// Importa tipos de login de login.schemas.ts
-import {
-  type LoginCredentials,
-  type LoginResponse,
-} from "../services/login.schemas";
-import { login } from "../services/login.service"; // <-- ¡IMPORTACIÓN ACTUALIZADA!
-import { useAuthStore } from "../store/auth.store";
+import { type LoginCredentials, type LoginResponse } from "../schemas/login.schemas";
+import { login } from "../services/login.service";
+import { useAuthStore, type AuthState } from "../store/auth.store";
+import { publicGraphQLClient } from "@shared/api/graphql-client";
 
 export const useLogin = () => {
-  const setAuth = useAuthStore((state) => state.setAuth);
+  // CORRECCIÓN: Tipar 'state' con AuthState
+  const setAuth = useAuthStore((state: AuthState) => state.setAuth);
   const navigate = useNavigate();
 
   return useMutation<LoginResponse, Error, LoginCredentials>({
-    mutationFn: (credentials: LoginCredentials) => login(credentials),
+    mutationFn: (credentials: LoginCredentials) =>
+      login(publicGraphQLClient, credentials),
 
-    onSuccess: (data) => {
+    onSuccess: async (
+      loggedInUser: LoginResponse,
+    ) => {
       setAuth({
-        accessToken: data.accessToken,
-        user: data.user,
+        accessToken: loggedInUser.accessToken,
+        user: loggedInUser.user,
       });
-      navigate("/home");
+      navigate("/home", { replace: true });
     },
 
     onError: (error) => {

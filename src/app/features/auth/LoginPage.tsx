@@ -1,54 +1,58 @@
 // src/features/auth/LoginPage.tsx
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import { useLogin } from "@features/auth/hooks/useLogin";
 import { useAuthStore } from "@features/auth/store/auth.store";
-
-// Importa el servicio de localStorage
-import { localStorageService } from "@shared/services/storage/localStorage.service"; // Nueva importación
-
-// Importa useRememberEmail y pásale el servicio
-import { useRememberEmail } from "@app/hooks/useRememberEmail"; // Asegúrate de la ruta a tu hook compartido
-
-// Importa LoginCredentialsSchema y LoginCredentials desde login.schemas.ts
+import { localStorageService } from "@shared/services/storage/localStorage.service";
+import { useRememberEmail } from "@app/hooks/useRememberEmail";
 import {
   LoginCredentialsSchema,
   type LoginCredentials,
-} from "@features/auth/services/login.schemas"; // RUTA CORREGIDA
-
-// Importación según tu instrucción: @shared/utils
-import { validateFormData, type FormErrors } from "@shared/utils/FormErrors"; // Ruta explícita
-
-// Importación según tu instrucción: @shared/components/organisms
-import { LoginForm } from "@shared/components/organisms"; // Ruta explícita
-
+} from "@features/auth/schemas/login.schemas";
+import { validateFormData, type FormErrors } from "@shared/utils/FormErrors";
+import { LoginForm } from "@shared/components/organisms";
 export const LoginPage = () => {
   const { mutate: performLogin, isPending, error } = useLogin();
-  // Pasa localStorageService al hook useRememberEmail
   const { email, setEmail, rememberMe, setRememberMe, handleRememberEmail } =
-    useRememberEmail(localStorageService); // <-- INYECCIÓN DE DEPENDENCIA
-
-  const navigate = useNavigate();
+  useRememberEmail(localStorageService);
   const accessToken = useAuthStore((state) => state.accessToken);
-
+  const hasHydrated = useAuthStore((state) => state._hasHydrated);
   const [password, setPassword] = useState("");
   const [formErrors, setFormErrors] = useState<FormErrors<LoginCredentials>>(
     {}
   );
+  const [generalLoginError, setGeneralLoginError] = useState<string | null>(
+    null
+  );
 
-  // Lógica para redirigir si el usuario ya está logeado
   useEffect(() => {
-    if (accessToken) {
-      navigate("/home", { replace: true });
+    if (error) {
+      setGeneralLoginError(
+        error.message || "Credenciales inválidas. Inténtalo de nuevo."
+      );
+    } else {
+      setGeneralLoginError(null); 
     }
-  }, [accessToken, navigate]);
+  }, [error]);
 
+  if (!hasHydrated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <h2 className="text-2xl font-bold text-center text-gray-800">
+          Cargando sesión...
+        </h2>
+      </div>
+    );
+  }
+
+  if (accessToken) {
+    return <Navigate to="/home" replace />;
+  }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormErrors({}); // Limpia errores anteriores al intentar un nuevo envío
-
+    setFormErrors({});
+    setGeneralLoginError(null);
     const credentials: LoginCredentials = { email, password };
-
     const validationErrors = validateFormData(
       LoginCredentialsSchema,
       credentials
@@ -68,7 +72,9 @@ export const LoginPage = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Iniciar Sesión
         </h2>
-        {/* Renderiza el LoginForm y pásale todas las props necesarias */}
+        {generalLoginError && (
+          <p className="text-red-500 text-center mb-4">{generalLoginError}</p>
+        )}
         <LoginForm
           email={email}
           setEmail={setEmail}
@@ -78,19 +84,9 @@ export const LoginPage = () => {
           setRememberMe={setRememberMe}
           formErrors={formErrors}
           isPending={isPending}
-          loginError={!!error}
+          loginError={!!error} 
           onSubmit={handleSubmit}
         />
-        {/* Eliminado: Enlace para ir a la página de registro */}
-        {/* <p className="mt-6 text-center text-gray-600">
-          ¿No tienes una cuenta?{" "}
-          <Link
-            to="/register"
-            className="font-semibold text-indigo-600 hover:text-indigo-500"
-          >
-            Registrarse
-          </Link>
-        </p> */}
       </div>
     </div>
   );

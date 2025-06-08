@@ -16,22 +16,19 @@ export const LoginResponseSchema = z.object({
   login: z.object({
     accessToken: z.string(),
     user: z.object({
-      // Construye el objeto Zod para user basado en la interfaz
       id: z.string(),
       email: z.string().email(),
       isActive: z.boolean(),
       avatarUrl: z.string().nullable(),
       role: z.object({
-        // El rol ahora incluye id, name, description y permissions.
-        id: z.string(), // O z.number(), según el tipo de ID de rol en tu backend
+        id: z.string(), 
         name: z.string(),
-        description: z.string(),
         permissions: z.array(
           z.object({
             // <-- ¡AÑADIDO! Array de permisos
             id: z.string(), // O z.number()
             name: z.string(),
-            description: z.string(),
+            description: z.string().optional(),
           })
         ),
       }),

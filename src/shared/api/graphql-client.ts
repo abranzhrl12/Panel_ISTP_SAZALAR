@@ -1,6 +1,7 @@
+// src/shared/api/graphql-client.ts (sin cambios respecto a la última versión limpia)
+
 import { GraphQLClient } from "graphql-request";
 
-// Asegúrate de tener tu variable de entorno en el archivo .env
 const endpoint = import.meta.env.VITE_GRAPHQL_ENDPOINT;
 
 if (!endpoint) {
@@ -9,5 +10,18 @@ if (!endpoint) {
   );
 }
 
-// Creamos y exportamos una única instancia del cliente de GraphQL
-export const graphqlClient = new GraphQLClient(endpoint);
+// Función factoría para crear instancias de GraphQLClient
+export const createGraphQLClient = (accessToken?: string): GraphQLClient => {
+  const headers: HeadersInit = {
+    "Content-Type": "application/json",
+  };
+
+  if (accessToken) {
+    headers.Authorization = `Bearer ${accessToken}`;
+  }
+
+  return new GraphQLClient(endpoint, { headers });
+};
+
+// Instancia pública del cliente GraphQL (sin token)
+export const publicGraphQLClient = createGraphQLClient();
