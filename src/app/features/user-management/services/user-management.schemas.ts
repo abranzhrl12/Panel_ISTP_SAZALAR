@@ -37,6 +37,14 @@ export const CreateUserResponseSchema = z.object({
       // <-- Actualizado para esperar un objeto de rol
       id: z.string(), // O z.number(), según el tipo de ID de rol en tu backend
       name: z.string(),
+      description: z.string().optional(),
+      permissions: z.array(
+        z.object({
+          id: z.string(),
+          name: z.string(),
+          description: z.string().optional(),
+        })
+      ),
     }),
   }) as z.ZodType<User>, // Asegura que el tipo inferido sea 'User'
 });
@@ -87,6 +95,14 @@ export const UpdateUserManagementResponseSchema = z.object({
       // <-- Actualizado para esperar un objeto de rol
       id: z.string(), // O z.number(), según el tipo de ID de rol en tu backend
       name: z.string(),
+      description: z.string().optional(),
+      permissions: z.array(
+        z.object({
+          id: z.string(),
+          name: z.string(),
+          description: z.string().optional(),
+        })
+      ),
     }),
   }) as z.ZodType<User>, // Asegura que el tipo inferido sea 'User'
 });
