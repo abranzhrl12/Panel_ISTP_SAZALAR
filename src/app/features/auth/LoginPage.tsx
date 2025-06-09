@@ -10,7 +10,8 @@ import {
   type LoginCredentials,
 } from "@features/auth/schemas/login.schemas";
 import { validateFormData, type FormErrors } from "@shared/utils/FormErrors";
-import { LoginForm } from "@shared/components/organisms";
+import { LoginForm } from "./components/loginForm/LoginForm";
+
 export const LoginPage = () => {
   const { mutate: performLogin, isPending, error } = useLogin();
   const { email, setEmail, rememberMe, setRememberMe, handleRememberEmail } =

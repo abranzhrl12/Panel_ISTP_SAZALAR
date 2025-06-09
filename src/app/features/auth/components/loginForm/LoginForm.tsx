@@ -5,7 +5,7 @@ import { FormField } from "@shared/components/molecules";
 import { RememberMeCheckbox } from "@shared/components/molecules";
 import { ButtonBasic } from "@shared/components/atoms"; // Ruta explícita
 import type { FormErrors } from "@shared/utils/FormErrors"; // Usa 'type'
-import type { LoginCredentials } from "@features/auth/services/auth.service"; // Usa 'type'
+import type { LoginCredentials } from "@features/auth/schemas/login.schemas";
 
 interface LoginFormProps {
   email: string;

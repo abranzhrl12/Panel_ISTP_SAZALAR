@@ -12,7 +12,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className }) => {
   return (
     <div
       className={`
-        w-full h-20 text-3xl font-extrabold flex items-center justify-center p-4 rounded-lg mb-8 contain-content
+        w-full h-20 text-3xl font-extrabold flex items-center justify-center p-4  mb-8 contain-content
         ${
           theme === "dark"
             ? "bg-indigo-700 text-white shadow-md"
@@ -22,7 +22,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className }) => {
       `}
     >
       <span className="block">
-        <img src="blas.jpg" alt="" />
+        Panel Salazar
       </span>
     </div>
   );

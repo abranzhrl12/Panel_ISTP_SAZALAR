@@ -4,10 +4,13 @@ import '@styles/index.css'
 import { ThemeProvider } from '@providers/ThemeProvider'
 import { App } from './app/App'
 
+
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
      <ThemeProvider>
-    <App/>
+      <App/>
+   
     </ThemeProvider>
   </StrictMode>,
 )
