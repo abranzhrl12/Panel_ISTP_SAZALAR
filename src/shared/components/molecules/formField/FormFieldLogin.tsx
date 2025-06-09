@@ -30,7 +30,7 @@ export const FormField: React.FC<FormFieldProps> = ({
         {label}
       </label>
       <div className="mt-1">
-        <InputText
+        <InputText className="p-3 transition-all duration-300 outline-0"
           id={id}
           name={id}
           type={type}
