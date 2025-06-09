@@ -85,7 +85,7 @@ export const Sidebar = () => {
             <>
               {" "}
               {/* Usamos un fragmento para agrupar los botones de administración */}
-              <li className="w-full">
+              <li className="w-full list-none">
                 <ButtonBasic
                   onClick={handleCreateUserClick}
                   text="Crear Usuario"
@@ -101,7 +101,7 @@ export const Sidebar = () => {
                 />
               </li>
               {/* NUEVO: Botón para Ver Usuarios - Solo visible si el usuario es administrador */}
-              <li className="w-full">
+              <li className="w-full list-none">
                 <ButtonBasic
                   onClick={handleViewUsersClick}
                   text="Ver Usuarios"
