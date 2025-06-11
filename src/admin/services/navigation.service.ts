@@ -1,8 +1,8 @@
-// src/admin/navigation/services/navigation.service.ts (Frontend)
-import { publicGraphQLClient } from '../../shared/api/graphql-client';
-import { GET_ADMIN_NAVIGATION_ITEMS_QUERY } from '../api/navigation.gql';
-import { GetAdminNavigationItemsResponseSchema } from '../schemas/navigation.schemas';
-import type { AdminNavigationItem } from '../interfaces/navigation-item.interface';
+// src\admin\services\navigation.service.ts
+import { publicGraphQLClient } from "../../shared/api/graphql-client";
+import { GET_ADMIN_NAVIGATION_ITEMS_QUERY } from "../api/navigation.gql";
+import { GetAdminNavigationItemsResponseSchema } from "../schemas/navigation.schemas";
+import type { AdminNavigationItem } from "../interfaces/navigation-item.interface";
 
 interface GetAdminNavigationItemsGraphQLResponse {
   getAdminNavigationItems: AdminNavigationItem[];
@@ -19,14 +19,16 @@ export const fetchAdminNavigationItems = async (
 ): Promise<AdminNavigationItem[]> => {
   const variables = {
     location: input?.location,
-    parentId: typeof input?.parentId === 'undefined' ? undefined : input.parentId,
+    parentId:
+      typeof input?.parentId === "undefined" ? undefined : input.parentId,
     isActive: input?.isActive,
   };
 
-  const data = await publicGraphQLClient.request<GetAdminNavigationItemsGraphQLResponse>(
-    GET_ADMIN_NAVIGATION_ITEMS_QUERY,
-    variables
-  );
+  const data =
+    await publicGraphQLClient.request<GetAdminNavigationItemsGraphQLResponse>(
+      GET_ADMIN_NAVIGATION_ITEMS_QUERY,
+      variables
+    );
 
   // Validación Zod
   try {

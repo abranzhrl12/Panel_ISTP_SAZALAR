@@ -1,4 +1,4 @@
-// src/shared/utils/formValidation.ts
+// @shared/utils/formValidation.ts
 import { ZodSchema, ZodError } from "zod";
 
 /**

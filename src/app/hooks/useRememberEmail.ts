@@ -1,4 +1,4 @@
-// src/app/hooks/useRememberEmail.ts
+// @app/hooks/useRememberEmail.ts
 import { useState, useEffect, useCallback } from "react";
 import type { IStorage } from "@shared/services/storage/storage.interface";
 

@@ -1,4 +1,4 @@
-// src/shared/components/molecules/RememberMeCheckbox/RememberMeCheckbox.tsx
+// @shared/components/molecules
 import React from "react";
 import { Checkbox } from "@shared/components/atoms"; // <--- Ajusta la ruta a tu Checkbox
 

@@ -30,6 +30,7 @@
       "@icons/*":[ "./src/shared/assets/icons/*"],
       "@features/*":[ "./src/app/features/*"],
       "@app/*": ["./src/app/*"],
+      "@config/*": ["./src/config/*"],
     }
   },
   "include": ["src"]

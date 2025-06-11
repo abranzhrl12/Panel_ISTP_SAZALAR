@@ -1,4 +1,4 @@
-// src/shared/components/molecules/NavMenu/NavLinkItem.tsx
+// @shared/components/molecules
 import React from "react";
 import { useTheme } from "@providers/ThemeProvider";
 

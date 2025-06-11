@@ -1,4 +1,4 @@
-// src/shared/components/atoms/FormErrorText/FormErrorText.tsx
+// @shared/components/atoms
 import React from "react";
 
 interface FormErrorTextProps {

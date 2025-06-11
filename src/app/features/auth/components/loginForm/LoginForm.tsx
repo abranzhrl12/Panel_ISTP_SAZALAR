@@ -1,10 +1,10 @@
-// src/features/auth/components/organisms/Login/LoginForm.tsx
+// @features\auth\components.tsx
 import React from "react";
 // Importa FormField desde su ruta explícita (asumiendo que está en FormFieldLogin/FormField.tsx)
 import { FormField } from "@shared/components/molecules";
 import { RememberMeCheckbox } from "@shared/components/molecules";
 import { ButtonBasic } from "@shared/components/atoms"; // Ruta explícita
-import type { FormErrors } from "@shared/utils/FormErrors"; // Usa 'type'
+import type { FormErrors } from "@shared/utils"; // Usa 'type'
 import type { LoginCredentials } from "@features/auth/schemas/login.schemas";
 
 interface LoginFormProps {

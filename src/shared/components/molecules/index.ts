@@ -6,3 +6,6 @@ export * from "./navMenu/NavList";
 export * from "./rememberMeCheckbox/RememberMeCheckbox";
 export * from "./themetoogle/ThemeToogle";
 export * from "./userAvatar/UserAvatar";
+export * from "./userDisplay/UserDisplay";
+export * from "./sidebarMainCategoryButton/SidebarMainCategoryButton";
+export * from "./navMenu/submenuNavLinkItem/SubmenuNavLinkItem";

@@ -1,4 +1,4 @@
-// src/app/router/ProtectedRoute.tsx
+// @app/router/ProtectedRoute.tsx
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "@features/auth/store/auth.store";

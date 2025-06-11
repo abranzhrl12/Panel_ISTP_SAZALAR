@@ -1,21 +1,21 @@
-// src/features/auth/LoginPage.tsx
+// @features/auth/LoginPage.tsx
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useLogin } from "@features/auth/hooks/useLogin";
 import { useAuthStore } from "@features/auth/store/auth.store";
 import { localStorageService } from "@shared/services/storage/localStorage.service";
-import { useRememberEmail } from "@app/hooks/useRememberEmail";
+import { useRememberEmail } from "@app/hooks/useRememberEmail"; // Asegúrate de que esta ruta sea correcta
 import {
   LoginCredentialsSchema,
   type LoginCredentials,
 } from "@features/auth/schemas/login.schemas";
-import { validateFormData, type FormErrors } from "@shared/utils/FormErrors";
-import { LoginForm } from "./components/loginForm/LoginForm";
+import { validateFormData, type FormErrors } from "@shared/utils"; // Asegúrate de que esta ruta sea correcta
+import { LoginForm } from "./components/LoginForm/loginForm";
 
 export const LoginPage = () => {
   const { mutate: performLogin, isPending, error } = useLogin();
   const { email, setEmail, rememberMe, setRememberMe, handleRememberEmail } =
-  useRememberEmail(localStorageService);
+    useRememberEmail(localStorageService);
   const accessToken = useAuthStore((state) => state.accessToken);
   const hasHydrated = useAuthStore((state) => state._hasHydrated);
   const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ export const LoginPage = () => {
         error.message || "Credenciales inválidas. Inténtalo de nuevo."
       );
     } else {
-      setGeneralLoginError(null); 
+      setGeneralLoginError(null);
     }
   }, [error]);
 
@@ -85,7 +85,7 @@ export const LoginPage = () => {
           setRememberMe={setRememberMe}
           formErrors={formErrors}
           isPending={isPending}
-          loginError={!!error} 
+          loginError={!!error}
           onSubmit={handleSubmit}
         />
       </div>

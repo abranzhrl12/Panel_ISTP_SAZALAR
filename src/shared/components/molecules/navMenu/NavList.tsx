@@ -1,4 +1,4 @@
-// src/shared/components/molecules/NavMenu/NavList.tsx
+// @shared/components/molecules
 import React from "react";
 import { NavLinkItem } from "./NavLinkItem"; // Importa el átomo NavLinkItem
 

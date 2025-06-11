@@ -1,9 +1,9 @@
-// src/features/auth/hooks/useAuthClient.ts
+//@features\auth\hooks\useAuthClient.ts
 
-import { useMemo } from 'react';
-import { GraphQLClient } from 'graphql-request';
-import { useAuthStore } from '@features/auth/store/auth.store'; // Tu store de Zustand
-import { createGraphQLClient } from '@shared/api/graphql-client'; // Tu función factoría del cliente GraphQL
+import { useMemo } from "react";
+import { GraphQLClient } from "graphql-request";
+import { useAuthStore } from "@features/auth/store/auth.store"; // Tu store de Zustand
+import { createGraphQLClient } from "@shared/api/graphql-client"; // Tu función factoría del cliente GraphQL
 
 export const useAuthClient = (): GraphQLClient => {
   const accessToken = useAuthStore((state) => state.accessToken);
@@ -16,4 +16,3 @@ export const useAuthClient = (): GraphQLClient => {
 
   return authClient;
 };
-

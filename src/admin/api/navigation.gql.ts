@@ -1,9 +1,17 @@
-// src/admin/navigation/api/navigation.gql.ts
+// src\admin\api\navigation.gql.ts
 import { gql } from "graphql-request";
 
 export const GET_ADMIN_NAVIGATION_ITEMS_QUERY = gql`
-  query GetAdminNavigationItems($location: String, $parentId: ID, $isActive: Boolean) {
-    getAdminNavigationItems(location: $location, parentId: $parentId, isActive: $isActive) {
+  query GetAdminNavigationItems(
+    $location: String
+    $parentId: ID
+    $isActive: Boolean
+  ) {
+    getAdminNavigationItems(
+      location: $location
+      parentId: $parentId
+      isActive: $isActive
+    ) {
       id
       label
       route # Asegúrate de que tu entidad se llame 'route', no 'url'
@@ -12,7 +20,8 @@ export const GET_ADMIN_NAVIGATION_ITEMS_QUERY = gql`
       isActive
       requiredPermission # Espera string | null
       parentId
-      children { # Este campo activa el @ResolveField del backend
+      children {
+        # Este campo activa el @ResolveField del backend
         id
         label
         route
@@ -21,7 +30,8 @@ export const GET_ADMIN_NAVIGATION_ITEMS_QUERY = gql`
         isActive
         requiredPermission
         parentId
-        children { # Segundo nivel de anidación. Añade más si necesitas mayor profundidad.
+        children {
+          # Segundo nivel de anidación. Añade más si necesitas mayor profundidad.
           id
           label
           route
@@ -30,7 +40,8 @@ export const GET_ADMIN_NAVIGATION_ITEMS_QUERY = gql`
           isActive
           requiredPermission
           parentId
-          children { # Tercer nivel
+          children {
+            # Tercer nivel
             id
             label
             route

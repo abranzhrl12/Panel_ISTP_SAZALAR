@@ -1,4 +1,4 @@
-// src/shared/components/molecules/UserAvatar/UserAvatar.tsx
+// @shared/components/molecules
 import React from "react";
 
 interface UserAvatarProps {

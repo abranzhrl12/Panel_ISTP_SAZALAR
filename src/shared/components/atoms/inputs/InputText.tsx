@@ -1,4 +1,4 @@
-// src/shared/components/atoms/Inputs/InputText.tsx
+// @shared/components/atoms/inputs
 import React from "react";
 
 interface InputTextProps extends React.InputHTMLAttributes<HTMLInputElement> {

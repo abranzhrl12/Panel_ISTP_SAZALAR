@@ -1,4 +1,4 @@
-// src/shared/components/molecules/FormFieldLogin/FormField.tsx
+// @shared/components/molecules
 import React from "react";
 import { InputText } from "@shared/components/atoms/inputs"; // Ruta correcta a InputText
 import { FormErrorText } from "@shared/components/atoms/formErrorText"; // Ruta correcta a FormErrorText
@@ -30,7 +30,8 @@ export const FormField: React.FC<FormFieldProps> = ({
         {label}
       </label>
       <div className="mt-1">
-        <InputText className="p-3 transition-all duration-300 outline-0"
+        <InputText
+          className="p-3 transition-all duration-300 outline-0"
           id={id}
           name={id}
           type={type}

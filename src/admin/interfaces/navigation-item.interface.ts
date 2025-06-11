@@ -1,4 +1,4 @@
-// src/admin/navigation/interfaces/navigation-item.interface.ts
+// src\admin\interfaces\navigation-item.interface.ts
 // Asegúrate de que esta interfaz coincida exactamente con la estructura de tu entidad NavigationItem
 // tal como la expone GraphQL.
 

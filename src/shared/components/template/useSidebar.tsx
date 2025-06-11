@@ -1,6 +1,5 @@
-// src/hooks/useSidebar.tsx
-
-import  { createContext, useState, useContext, ReactNode } from 'react';
+// @shared/components/template/useSidebar.tsx
+import { createContext, useState, useContext, type ReactNode } from "react";
 
 // 1. Definimos el tipo de datos que nuestro contexto manejará.
 interface SidebarContextType {
@@ -18,7 +17,7 @@ const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 export const SidebarProvider = ({ children }: { children: ReactNode }) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
-  const toggleSidebar = () => setIsCollapsed(prev => !prev);
+  const toggleSidebar = () => setIsCollapsed((prev) => !prev);
   const openSidebar = () => setIsCollapsed(false);
   const closeSidebar = () => setIsCollapsed(true);
 
@@ -31,9 +30,7 @@ export const SidebarProvider = ({ children }: { children: ReactNode }) => {
   };
 
   return (
-    <SidebarContext.Provider value={value}>
-      {children}
-    </SidebarContext.Provider>
+    <SidebarContext.Provider value={value}>{children}</SidebarContext.Provider>
   );
 };
 
@@ -44,7 +41,7 @@ export const useSidebar = () => {
 
   // Buena práctica: si el hook se usa fuera del provider, lanzamos un error.
   if (context === undefined) {
-    throw new Error('useSidebar debe ser usado dentro de un SidebarProvider');
+    throw new Error("useSidebar debe ser usado dentro de un SidebarProvider");
   }
 
   return context;

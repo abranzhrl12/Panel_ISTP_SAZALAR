@@ -1,4 +1,4 @@
-// src/shared/components/atoms/buttons/ButtonBasic.tsx
+// @shared\components\atoms
 import React from "react";
 
 interface ButtonBasicProps

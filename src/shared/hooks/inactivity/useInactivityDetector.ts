@@ -1,10 +1,10 @@
-// src/shared/hooks/inactivity/useInactivityDetector.ts
+// @shared\hooks\inactivity\useInactivityDetector.ts
 // Este hook detecta la inactividad del usuario y dispara el cierre de sesión.
 
 import { useEffect, useRef, useCallback } from "react";
 import { useAuthStore } from "@features/auth/store/auth.store";
 
-const INACTIVITY_TIMEOUT = 25 * 1000;
+const INACTIVITY_TIMEOUT = 99999 * 1000;
 
 export const useInactivityDetector = (enabled: boolean = true) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null); // Referencia mutable para el temporizador de inactividad

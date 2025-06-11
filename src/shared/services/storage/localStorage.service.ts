@@ -1,4 +1,4 @@
-// src/shared/services/storage/localStorage.service.ts
+// @shared\services\storage\localStorage.service.ts
 import type { IStorage } from "@shared/services/storage/storage.interface";
 
 export const localStorageService: IStorage = {

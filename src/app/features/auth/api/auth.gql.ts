@@ -1,22 +1,19 @@
-// src/features/auth/services/auth.gql.ts
+// @features/auth/api/auth.gql.ts
 import { gql } from "graphql-request";
 
 export const USER_LOGIN_MUTATION = gql`
-  mutation UserLogin($loginInput: LoginInput!) {
-    login(loginInput: $loginInput) {
+  mutation LoginUser($loginInput: LoginInput!) {
+    loginUser(loginInput: $loginInput) {
       accessToken
       user {
         id
         email
+        name
+        lastName
         isActive
-        avatarUrl
         role {
           id
           name
-          permissions {
-            id
-            name
-          }
         }
       }
     }

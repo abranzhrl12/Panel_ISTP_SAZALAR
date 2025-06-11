@@ -1,4 +1,4 @@
-// src/shared/components/atoms/Checkbox/Checkbox.tsx
+// @shared/components/atoms
 import React from "react";
 
 interface CheckboxProps extends React.InputHTMLAttributes<HTMLInputElement> {

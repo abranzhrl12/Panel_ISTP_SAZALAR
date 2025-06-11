@@ -1,7 +1,7 @@
-// src/shared/components/molecules/BrandLogo/BrandLogo.tsx
+// @shared/components/molecules
 
 import { useTheme } from "@providers/ThemeProvider";
-
+import LogoSalazar from "../../../../../public/LOGO.jpg";
 interface BrandLogoProps {
   className?: string;
 }
@@ -12,7 +12,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className }) => {
   return (
     <div
       className={`
-        w-full h-20 text-3xl font-extrabold flex items-center justify-center p-4  mb-8 contain-content
+        w-full h-10   flex items-center justify-center  mb-8 contain-content
         ${
           theme === "dark"
             ? "bg-indigo-700 text-white shadow-md"
@@ -21,9 +21,7 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({ className }) => {
         ${className || ""}
       `}
     >
-      <span className="block">
-        Panel Salazar
-      </span>
+      <img src={LogoSalazar} alt="" />
     </div>
   );
 };

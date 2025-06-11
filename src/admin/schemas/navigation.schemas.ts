@@ -1,4 +1,4 @@
-// src/admin/navigation/schemas/navigation.schemas.ts
+// src\admin\schemas\navigation.schemas.ts
 import { z } from "zod";
 import { type AdminNavigationItem } from "../interfaces/navigation-item.interface"; // <- RUTA CORREGIDA
 
@@ -16,9 +16,13 @@ const BaseAdminNavigationItemSchema = z.object({
 });
 
 // 2. Definimos el esquema recursivo final utilizando z.lazy() y .extend().
-export const AdminNavigationItemSchema: z.ZodSchema<AdminNavigationItem> = BaseAdminNavigationItemSchema.extend({
-  children: z.lazy(() => z.array(AdminNavigationItemSchema)).nullable().optional(),
-});
+export const AdminNavigationItemSchema: z.ZodSchema<AdminNavigationItem> =
+  BaseAdminNavigationItemSchema.extend({
+    children: z
+      .lazy(() => z.array(AdminNavigationItemSchema))
+      .nullable()
+      .optional(),
+  });
 
 // Esquema para la respuesta completa de la Query GraphQL de ítems de navegación
 export const GetAdminNavigationItemsResponseSchema = z.object({
@@ -30,4 +34,6 @@ export const GetAdminNavigationItemsResponseSchema = z.object({
 });
 
 // Tipo inferido para la respuesta completa
-export type GetAdminNavigationItemsResponse = z.infer<typeof GetAdminNavigationItemsResponseSchema>;
+export type GetAdminNavigationItemsResponse = z.infer<
+  typeof GetAdminNavigationItemsResponseSchema
+>;
